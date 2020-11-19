@@ -1,0 +1,124 @@
+body {
+  font-family: Helvetica, Arial, sans-serif;
+  margin-top: 30px;
+  text-align: center;
+}
+
+.Weather .border {
+  background: linear-gradient(to bottom, #323232 0%, #3f3f3f 40%, #1c1c1c 150%),
+    linear-gradient(
+      to top,
+      rgba(255, 255, 255, 0.4) 0%,
+      rgba(0, 0, 0, 0.25) 200%
+    );
+  background-blend-mode: multiply;
+  border: 1px solid black;
+  border-radius: 25px;
+  color: #ffffff;
+  display: block;
+  margin: 0 auto;
+  max-width: 420px;
+}
+
+.Weather .location {
+  margin-top: 20px;
+}
+
+.Weather button {
+  margin-left: 5px;
+  margin-right: 5px;
+  padding: 2px;
+  width: 30px;
+}
+
+.Weather button .fas {
+  color: #6d757d;
+  font-size: 20px;
+}
+
+#searchIcon {
+  position: relative;
+  top: 2px;
+  right: 0px;
+}
+
+#locationIcon {
+  position: relative;
+  top: 2px;
+  right: 0px;
+}
+
+.Weather h1 {
+  font-weight: 700;
+  margin: 10px 5px 5px 5px;
+}
+
+.Weather h2 {
+  font-size: 14px;
+}
+
+.Weather .weatherLocal {
+  font-size: 20px;
+}
+
+.Weather .tempLocal {
+  font-size: 48px;
+  font-weight: 700;
+}
+
+.Weather .units {
+  font-size: 16px;
+  font-weight: 700;
+  position: relative;
+  top: -22px;
+  left: -2px;
+}
+
+.Weather .units a {
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.Weather .units a:hover {
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.Weather .weatherIndicators {
+  font-size: 10px;
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+
+.Weather #forecast {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.Weather h3 {
+  font-size: 14px;
+  text-align: center;
+}
+
+.Weather .forecastWeather {
+  display: block;
+  margin: auto;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.Weather .forecastWeather img {
+  width: 50px;
+  height: 50px;
+}
+
+.Weather .forecastTemperature {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.Weather .footer {
+  color: #000000;
+  font-size: 10px;
+  margin-top: 10px;
+}
