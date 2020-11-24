@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import axios from "axios";
+import FormattedDate from "./FormattedDate";
 
 import "./Weather.css";
 
-export default function Weather() {
-    let [city, setCity] = useState("Enter City");
+export default function Weather(props) {
+  const [city, setCity] = useState(props.defaultCity);
   const [loaded, setLoaded] = useState(false);
   const [weather, setWeather] = useState({});
 
@@ -18,7 +19,7 @@ export default function Weather() {
   function displayWeather(response) {
     setLoaded(true);
     setWeather({
-      date: "Monday, October 26, 10:12",
+      date: new Date(response.data.dt * 1000),
       imgUrl: `${imgCode[response.data.weather[0].icon]}`,
       temperature: response.data.main.temp,
       wind: response.data.wind.speed,
@@ -75,7 +76,7 @@ export default function Weather() {
         </div>
         <div className="weatherInfo">
           <h1>{city}</h1>
-          <h2>{weather.date}</h2>
+          <h2>Monday, October 26, 10:12</h2>
           <img
             className="main-icon"
             src={weather.imgUrl}
@@ -83,7 +84,7 @@ export default function Weather() {
             width="120"
           />
           <br />
-          <span className="weatherLocal">{weather.description}</span>
+          <span className="weatherLocal text-capitalize">{weather.description}</span>
           <br />
           <span className="tempLocal">{Math.round(weather.temperature)}</span>
           <span className="units">
@@ -158,7 +159,7 @@ export default function Weather() {
   );
 } else {
     return (
-         <div className="Weather">
+    <div className="Weather">
       <div className="border">
         <div className="location">
          {form}
