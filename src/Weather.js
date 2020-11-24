@@ -1,32 +1,41 @@
 import React, { useState } from "react";
 import axios from "axios";
-import FormattedDate from "./FormattedDate";
+import WeatherInfo from "./WeatherInfo";
 
 import "./Weather.css";
 
 export default function Weather(props) {
   const [city, setCity] = useState(props.defaultCity);
-  const [loaded, setLoaded] = useState(false);
-  const [weather, setWeather] = useState({});
-
-  function handleSubmit(event) {
-    event.preventDefault();
-    let apiKey = "c21c69cfcac20320f0c03c2e080dbc19";
-    let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
-    axios.get(apiUrl).then(displayWeather);
-  }
+  //const [loaded, setLoaded] = useState(false);
+  const [weather, setWeather] = useState({ ready: false });
 
   function displayWeather(response) {
-    setLoaded(true);
     setWeather({
+      ready: true,
       date: new Date(response.data.dt * 1000),
       imgUrl: `${imgCode[response.data.weather[0].icon]}`,
       temperature: response.data.main.temp,
       wind: response.data.wind.speed,
       humidity: response.data.main.humidity,
       icon: `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`,
-      description: response.data.weather[0].main
+      description: response.data.weather[0].main,
+      city: response.data.name
     });
+  }
+
+  function handleSubmit(event) {
+    event.preventDefault();
+    search();
+  }
+
+   function updateCity(event) {
+    setCity(event.target.value);
+  }
+
+    function search() {
+    let apiKey = "c21c69cfcac20320f0c03c2e080dbc19";
+    let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
+    axios.get(apiUrl).then(displayWeather);
   }
 
    let imgCode = {
@@ -51,201 +60,40 @@ export default function Weather(props) {
   };
 
   let form = (
-    <form onSubmit={handleSubmit}>
+    <form className="form-inline justify-content-center"
+    onSubmit={handleSubmit}>
       <input
-        className="searchField"
+        className="form-control searchField"
         type="search"
         onChange={updateCity}
         placeholder="Enter a city..."
       />
-      <button type="Submit"><i className="fas fa-search" id="searchIcon"></i></button>
-      <button type="Submit"><i className="fas fa-map-marker-alt" id="locationIcon"></i></button>
+      <button type="Submit" className="btn btn-light mb-2"><i className="fas fa-search" id="searchIcon"></i></button>
+      <button type="Submit" className="btn btn-light mb-2"><i className="fas fa-map-marker-alt" id="locationIcon"></i></button>
     </form>
   );
 
-  function updateCity(event) {
-    setCity(event.target.value);
-  }
-
-  if(loaded) {
+  if(weather.ready) {
   return (
     <div className="Weather">
       <div className="border">
         <div className="location">
          {form}
         </div>
-        <div className="weatherInfo">
-          <h1>{city}</h1>
-          <h2>Monday, October 26, 10:12</h2>
-          <img
-            className="main-icon"
-            src={weather.imgUrl}
-            alt={weather.description}
-            width="120"
-          />
-          <br />
-          <span className="weatherLocal text-capitalize">{weather.description}</span>
-          <br />
-          <span className="tempLocal">{Math.round(weather.temperature)}</span>
-          <span className="units">
-            <a href="/" className="active">
-              °C
-            </a>
-            |<a href="/">°F</a>
-          </span>
-          <div className="weatherIndicators">
-            Humidity: {weather.humidity}% | Wind: {weather.wind}km/h
-          </div>
-           <div class="predictions">
-                <div class="row">
-                    <div class="col">
-                        <span class="day">Mon</span>
-                        <br />
-                        <span class="date"> 14/9 </span>
-                        <br />
-                        <img src="https://ssl.gstatic.com/onebox/weather/256/sunny.png" alt="sunny" width="40" />
-                        <br />
-                        <span class="dayTemp">21°C</span>
-                    </div>
-                    <div class="col">
-                        <span class="day">Tue</span>
-                        <br />
-                        <span class="date">15/9 </span>
-                        <br />
-                        <img src="https://ssl.gstatic.com/onebox/weather/256/cloudy.png" alt="cloudy" width="40" />
-                        <br />
-                        <span class="dayTemp">19°C</span>
-                    </div>
-                    <div class="col">
-                        <span class="day">Wed</span>
-                        <br />
-                        <span class="date">16/9 </span>
-                        <br />
-                        <img src="https://ssl.gstatic.com/onebox/weather/256/partly_cloudy.png" alt="partly_cloudy"
-                            width="40" />
-                        <br />
-                        <span class="dayTemp">20°C</span>
-                    </div>
-                    <div class="col">
-                        <span class="day">Thu</span>
-                        <br />
-                        <span class="date">17/9 </span>
-                        <br />
-                        <img src="https://ssl.gstatic.com/onebox/weather/256/partly_cloudy.png" alt="partly_cloudy"
-                            width="40" />
-                        <br />
-                        <span class="dayTemp">23°C</span>
-                    </div>
-                    <div class="col">
-                        <span class="day">Fri</span>
-                        <br />
-                        <span class="date">18/9 </span>
-                        <br />
-                        <img src="https://ssl.gstatic.com/onebox/weather/256/sunny.png" alt="sunny" width="40" />
-                        <br />
-                        <span class="dayTemp">24°C</span>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <WeatherInfo data={weather}/>
       </div>
+
       <div className="footer">
         <a href="https://github.com/noadonna/shecodes-weather-app-react">
           Open-source code
         </a>{" "}
         by Carine
       </div>
+
     </div>
   );
 } else {
-    return (
-    <div className="Weather">
-      <div className="border">
-        <div className="location">
-         {form}
-        </div>
-        <div className="weatherInfo">
-          <h1>Amsterdam</h1>
-          <h2>Monday, October 26, 10:12</h2>
-          <img
-            className="main-icon"
-            src="https://ssl.gstatic.com/onebox/weather/256/sunny.png"
-            alt="Sunny"
-            width="120"
-          />
-          <br />
-          <span className="weatherLocal">Sunny</span>
-          <br />
-          <span className="tempLocal">{24}</span>
-          <span className="units">
-            <a href="/" className="active">
-              °C
-            </a>
-            |<a href="/">°F</a>
-          </span>
-          <div className="weatherIndicators">
-            Humidity: 35% | Wind: 4km/h
-          </div>
-           <div class="predictions">
-                <div class="row">
-                    <div class="col">
-                        <span class="day">Mon</span>
-                        <br />
-                        <span class="date"> 14/9 </span>
-                        <br />
-                        <img src="https://ssl.gstatic.com/onebox/weather/256/sunny.png" alt="sunny" width="40" />
-                        <br />
-                        <span class="dayTemp">21°C</span>
-                    </div>
-                    <div class="col">
-                        <span class="day">Tue</span>
-                        <br />
-                        <span class="date">15/9 </span>
-                        <br />
-                        <img src="https://ssl.gstatic.com/onebox/weather/256/cloudy.png" alt="cloudy" width="40" />
-                        <br />
-                        <span class="dayTemp">19°C</span>
-                    </div>
-                    <div class="col">
-                        <span class="day">Wed</span>
-                        <br />
-                        <span class="date">16/9 </span>
-                        <br />
-                        <img src="https://ssl.gstatic.com/onebox/weather/256/partly_cloudy.png" alt="partly_cloudy"
-                            width="40" />
-                        <br />
-                        <span class="dayTemp">20°C</span>
-                    </div>
-                    <div class="col">
-                        <span class="day">Thu</span>
-                        <br />
-                        <span class="date">17/9 </span>
-                        <br />
-                        <img src="https://ssl.gstatic.com/onebox/weather/256/partly_cloudy.png" alt="partly_cloudy"
-                            width="40" />
-                        <br />
-                        <span class="dayTemp">23°C</span>
-                    </div>
-                    <div class="col">
-                        <span class="day">Fri</span>
-                        <br />
-                        <span class="date">18/9 </span>
-                        <br />
-                        <img src="https://ssl.gstatic.com/onebox/weather/256/sunny.png" alt="sunny" width="40" />
-                        <br />
-                        <span class="dayTemp">24°C</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-      </div>
-      <div className="footer">
-        <a href="https://github.com/noadonna/shecodes-weather-app-react">
-          Open-source code
-        </a>{" "}
-        by Carine
-      </div>
-    </div>
-    );
+    search();
+    return "Loading...";
   }
 }
