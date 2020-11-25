@@ -29,13 +29,14 @@
   margin-right: 5px;
   height: calc(1.5em + 0.75rem + 2px);
   padding: 0.375rem 0.25rem;
+  width: 35px;
   position: relative;
   top: 4px;
 }
 
 .Weather button .fas {
   color: #6d757d;
-  font-size: 28px;
+  font-size: 26px;
 }
 
 .Weather h1 {

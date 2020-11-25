@@ -38,6 +38,19 @@ export default function Weather(props) {
     axios.get(apiUrl).then(displayWeather);
   }
 
+  function searchCity(position) {
+    let apiKey = "c21c69cfcac20320f0c03c2e080dbc19";
+    let latitude = position.coords.latitude;
+    let longitude = position.coords.longitude;
+    let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=metric`;
+    axios.get(apiUrl).then(displayWeather);
+  }
+
+  function useCity(event) {
+    event.preventDefault();
+    navigator.geolocation.getCurrentPosition(searchCity);
+  }
+
   let form = (
     <form className="form-inline justify-content-center"
     onSubmit={handleSubmit}>
@@ -48,6 +61,7 @@ export default function Weather(props) {
         placeholder="Enter a city..."
       />
       <button type="Submit" className="btn btn-light mb-2"><i className="fas fa-search" id="searchIcon"></i></button>
+      <button type="Submit" className="btn btn-light mb-2"><i className="fas fa-map-marker-alt" id="locationIcon" onClick={useCity}></i></button>
     </form>
   );
 
