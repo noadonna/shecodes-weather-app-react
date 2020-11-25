@@ -48,7 +48,6 @@ export default function Weather(props) {
         placeholder="Enter a city..."
       />
       <button type="Submit" className="btn btn-light mb-2"><i className="fas fa-search" id="searchIcon"></i></button>
-      <button type="Submit" className="btn btn-light mb-2"><i className="fas fa-map-marker-alt" id="locationIcon"></i></button>
     </form>
   );
 
