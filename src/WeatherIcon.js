@@ -24,10 +24,9 @@ export default function WeatherIcon(props) {
 
 return (
     <img
-            className="weatherIcon"
-            src={imgCode[props.code]}
-            alt="description"
-            width="120"
-          />
+      src={imgCode[props.code]}
+      alt="description"
+      width="150"
+    />
 );
 }

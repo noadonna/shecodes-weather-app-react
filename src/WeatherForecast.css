@@ -3,6 +3,7 @@
   margin: 10px 0;
 }
 
-.WeatherForecast canvas {
+.WeatherForecast img {
   display: block;
+  width: 50px;
 }
