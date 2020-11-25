@@ -6,8 +6,8 @@ import WeatherForecast from "./WeatherForecast";
 import "./Weather.css";
 
 export default function Weather(props) {
-  const [city, setCity] = useState(props.defaultCity);
   const [weather, setWeather] = useState({ ready: false });
+  const [city, setCity] = useState(props.defaultCity);
 
   function displayWeather(response) {
     setWeather({
@@ -18,8 +18,8 @@ export default function Weather(props) {
       humidity: response.data.main.humidity,
       description: response.data.weather[0].main,
       city: response.data.name,
-      imgUrl: `${imgCode[response.data.weather[0].icon]}`,
-      icon: `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`,
+      icon: response.data.weather[0].icon,
+      imgUrl: `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`,
     });
   }
 
@@ -37,27 +37,6 @@ export default function Weather(props) {
     let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
     axios.get(apiUrl).then(displayWeather);
   }
-
-   let imgCode = {
-    "01d": "https://ssl.gstatic.com/onebox/weather/256/sunny.png",
-    "01n": "https://ssl.gstatic.com/onebox/weather/256/sunny.png",
-    "02d": "https://ssl.gstatic.com/onebox/weather/256/partly_cloudy.png",
-    "02n": "https://ssl.gstatic.com/onebox/weather/256/partly_cloudy.png",
-    "03d": "https://ssl.gstatic.com/onebox/weather/256/partly_cloudy.png",
-    "03n": "https://ssl.gstatic.com/onebox/weather/256/partly_cloudy.png",
-    "04d": "https://ssl.gstatic.com/onebox/weather/256/cloudy.png",
-    "04n": "https://ssl.gstatic.com/onebox/weather/256/cloudy.png",
-    "09d": "https://ssl.gstatic.com/onebox/weather/256/rain_heavy.png",
-    "09n": "https://ssl.gstatic.com/onebox/weather/256/rain_heavy.png",
-    "10d": "https://ssl.gstatic.com/onebox/weather/256/rain.png",
-    "10n": "https://ssl.gstatic.com/onebox/weather/256/rain.png",
-    "11d": "https://ssl.gstatic.com/onebox/weather/256/thunderstorms.png",
-    "11n": "https://ssl.gstatic.com/onebox/weather/256/thunderstorms.png",
-    "13d": "https://ssl.gstatic.com/onebox/weather/256/snow.png",
-    "13n": "https://ssl.gstatic.com/onebox/weather/256/snow.png",
-    "50d": "https://ssl.gstatic.com/onebox/weather/256/snow.png",
-    "50n": "https://ssl.gstatic.com/onebox/weather/256/snow.png",
-  };
 
   let form = (
     <form className="form-inline justify-content-center"
@@ -90,7 +69,6 @@ export default function Weather(props) {
         </a>{" "}
         by Carine
       </div>
-
     </div>
   );
 } else {
