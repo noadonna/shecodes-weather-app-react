@@ -13,7 +13,10 @@ export default function WeatherInfo(props) {
           <br />
           <span className="weatherLocal text-capitalize">{props.data.description}</span>
           <br />
-          <WeatherTemperature celsius={props.data.temperature} />
+          <WeatherTemperature
+          celsius={props.data.temperature}
+          unit={props.unit}
+          setUnit={props.setUnit} />
           <div className="weatherIndicators">
             Humidity: {props.data.humidity}% | Wind: {props.data.wind}km/h
           </div>

@@ -37,6 +37,8 @@
 .Weather button .fas {
   color: #6d757d;
   font-size: 26px;
+  position: relative;
+  top: -1px;
 }
 
 .Weather h1 {
@@ -53,7 +55,7 @@
 }
 
 .Weather .tempLocal {
-  font-size: 48px;
+  font-size: 52px;
   font-weight: 700;
 }
 
@@ -61,7 +63,7 @@
   font-size: 16px;
   font-weight: 700;
   position: relative;
-  top: -22px;
+  top: -25px;
   left: -2px;
 }
 
@@ -77,7 +79,6 @@
 
 .Weather .weatherIndicators {
   font-size: 10px;
-  margin-top: 10px;
   margin-bottom: 20px;
 }
 
