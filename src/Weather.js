@@ -1,25 +1,25 @@
 import React, { useState } from "react";
 import axios from "axios";
 import WeatherInfo from "./WeatherInfo";
+import WeatherForecast from "./WeatherForecast";
 
 import "./Weather.css";
 
 export default function Weather(props) {
   const [city, setCity] = useState(props.defaultCity);
-  //const [loaded, setLoaded] = useState(false);
   const [weather, setWeather] = useState({ ready: false });
 
   function displayWeather(response) {
     setWeather({
       ready: true,
       date: new Date(response.data.dt * 1000),
-      imgUrl: `${imgCode[response.data.weather[0].icon]}`,
       temperature: response.data.main.temp,
       wind: response.data.wind.speed,
       humidity: response.data.main.humidity,
-      icon: `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`,
       description: response.data.weather[0].main,
-      city: response.data.name
+      city: response.data.name,
+      imgUrl: `${imgCode[response.data.weather[0].icon]}`,
+      icon: `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`,
     });
   }
 
@@ -81,6 +81,7 @@ export default function Weather(props) {
          {form}
         </div>
         <WeatherInfo data={weather}/>
+        <WeatherForecast city={weather.city}/>
       </div>
 
       <div className="footer">
