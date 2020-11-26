@@ -76,13 +76,6 @@ export default function Weather(props) {
         <WeatherInfo data={weather} unit={unit} setUnit={setUnit} />
         <WeatherForecast city={weather.city} unit={unit}/>
       </div>
-
-      <div className="footer">
-        <a href="https://github.com/noadonna/shecodes-weather-app-react">
-          Open-source code
-        </a>{" "}
-        by Carine
-      </div>
     </div>
   );
 } else {
