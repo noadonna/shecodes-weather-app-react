@@ -21,7 +21,7 @@ if (props.unit === "celsius") {
       <div className="WeatherForecastData col">
         {hours()}
         <WeatherIcon code={props.data.weather[0].icon} />
-        <span class="temperature"> {temperature()}</span>
+        <span className="temperature"> {temperature()}</span>
       </div>
     );
   } else {
@@ -30,7 +30,7 @@ if (props.unit === "celsius") {
       <div className="WeatherForecastData col">
         {hours()}
         <WeatherIcon code={props.data.weather[0].icon} />
-        <span class="temperature"> {temperature}°F</span>
+        <span className="temperature"> {temperature}°F</span>
       </div>
     );
   }
