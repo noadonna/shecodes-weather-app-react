@@ -42,12 +42,12 @@
 }
 
 .Weather .searchField {
-  max-width: 200px;
+  max-width: 220px;
 }
 
 .Weather h1 {
   font-weight: 700;
-  font-size: 32px;
+  font-size: 36px;
   margin: 10px 5px 5px 5px;
 }
 
